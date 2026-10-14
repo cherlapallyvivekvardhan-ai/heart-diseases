@@ -11,7 +11,7 @@ import joblib
 import numpy as np
 from typing import List
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.gzip import GZipMiddleware
@@ -115,9 +115,12 @@ class DiagnosticResult(BaseModel):
 # Endpoints
 @app.get("/", response_class=HTMLResponse)
 async def serve_homepage():
-    """Serves the interactive web application UI directly from in-memory cache."""
+    """Serves the interactive web application UI."""
+    if os.path.exists(index_file):
+        with open(index_file, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
     if INDEX_HTML_CACHE:
-        return HTMLResponse(content=INDEX_HTML_CACHE, headers={"Cache-Control": "public, max-age=3600"})
+        return HTMLResponse(content=INDEX_HTML_CACHE)
     return HTMLResponse("<h2>CardioScan AI Web App</h2><p>Index template loading...</p>")
 
 @app.get("/api/health")
@@ -238,6 +241,20 @@ async def predict_batch(batch: BatchPatientsInput):
         "high_risk_count": int(np.sum(preds)),
         "results": results
     }
+
+@app.get("/download/presentation")
+async def download_presentation():
+    """Provides direct browser download of Vivek Vardhan's GCET Internship PowerPoint Presentation."""
+    pptx_path = os.path.join(base_dir, "Vivek_Vardhan_Internship_Presentation_GCET.pptx")
+    if not os.path.exists(pptx_path):
+        pptx_path = os.path.join(base_dir, "static", "Vivek_Vardhan_Internship_Presentation_GCET.pptx")
+    if os.path.exists(pptx_path):
+        return FileResponse(
+            path=pptx_path,
+            filename="Vivek_Vardhan_Internship_Presentation_GCET.pptx",
+            media_type="application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        )
+    raise HTTPException(status_code=404, detail="Presentation file not found.")
 
 if __name__ == "__main__":
     import uvicorn

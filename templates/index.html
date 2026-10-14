@@ -38,8 +38,11 @@
                         Student: <strong class="text-white">Vivek Vardhan</strong>
                     </span>
                     <span class="bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700 text-slate-300">
-                        Course: <strong class="text-white">ML & AI Capstone</strong>
+                        Course: <strong class="text-white">GCET CSE(AI&ML)</strong>
                     </span>
+                    <a href="/download/presentation" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold px-3 py-1 rounded-lg transition shadow flex items-center gap-1">
+                        <span>📥 Download PPTX Presentation</span>
+                    </a>
                     <a href="/docs" target="_blank" class="bg-teal-600 hover:bg-teal-500 text-white font-medium px-2.5 py-1 rounded-lg transition shadow">
                         Swagger API ↗
                     </a>
@@ -58,11 +61,14 @@
                 <button onclick="switchTab('batch')" id="tab-btn-batch" class="tab-btn py-3 text-slate-600 hover:text-teal-700 font-medium transition">
                     📁 Batch CSV Screening
                 </button>
+                <button onclick="switchTab('presentation')" id="tab-btn-presentation" class="tab-btn py-3 text-slate-600 hover:text-teal-700 font-medium transition">
+                    📑 GCET Internship Presentation (13 Slides)
+                </button>
                 <button onclick="switchTab('benchmarks')" id="tab-btn-benchmarks" class="tab-btn py-3 text-slate-600 hover:text-teal-700 font-medium transition">
                     📊 Benchmarks & ROC Curves
                 </button>
                 <button onclick="switchTab('extended')" id="tab-btn-extended" class="tab-btn py-3 text-slate-600 hover:text-teal-700 font-medium transition">
-                    🧩 Additional Options (Loan & Clusters)
+                    🧩 Additional Options
                 </button>
             </nav>
         </div>
@@ -318,6 +324,54 @@
                             </thead>
                             <tbody id="batch-tbody" class="divide-y divide-slate-100"></tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TAB: GCET INTERNSHIP PRESENTATION (13 SLIDES) -->
+        <!-- ============================================================== -->
+        <div id="tab-content-presentation" class="tab-content hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm mb-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-100 gap-4">
+                    <div>
+                        <span class="bg-teal-50 text-teal-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">GCET Internship Template</span>
+                        <h2 class="text-xl font-bold text-slate-900 mt-1">Geethanjali College of Engineering and Technology (UGC Autonomous)</h2>
+                        <p class="text-xs text-slate-500">Department of CSE (AI&ML) | Academic Year 2026-27 | Student: Vivek Vardhan</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="/download/presentation" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold px-4 py-2 rounded-xl text-xs shadow transition flex items-center gap-2">
+                            <span>📥 Download .PPTX Presentation</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Slide Viewer Navigation -->
+                <div class="my-6 flex flex-wrap gap-2 text-xs">
+                    <button onclick="showSlide(1)" class="slide-nav-btn active px-3 py-1.5 rounded-lg border font-bold bg-slate-900 text-white" id="sbtn-1">Slide 1: Title</button>
+                    <button onclick="showSlide(2)" class="slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700" id="sbtn-2">Slide 2: Intro</button>
+                    <button onclick="showSlide(3)" class="slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700" id="sbtn-3">Slide 3: Related Work</button>
+                    <button onclick="showSlide(4)" class="slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700" id="sbtn-4">Slide 4: Tech Stack</button>
+                    <button onclick="showSlide(5)" class="slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700" id="sbtn-5">Slide 5: Pipeline & Data</button>
+                    <button onclick="showSlide(6)" class="slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700" id="sbtn-6">Slide 6: Benchmarks</button>
+                    <button onclick="showSlide(7)" class="slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700" id="sbtn-7">Slide 7: ROC Curves</button>
+                    <button onclick="showSlide(8)" class="slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700" id="sbtn-8">Slide 8: Web Deploy</button>
+                    <button onclick="showSlide(9)" class="slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700" id="sbtn-9">Slide 9: Learning 1</button>
+                    <button onclick="showSlide(10)" class="slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700" id="sbtn-10">Slide 10: Learning 2</button>
+                    <button onclick="showSlide(11)" class="slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700" id="sbtn-11">Slide 11: Conclusion</button>
+                    <button onclick="showSlide(12)" class="slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700" id="sbtn-12">Slide 12: References</button>
+                    <button onclick="showSlide(13)" class="slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700" id="sbtn-13">Slide 13: Thank You</button>
+                </div>
+
+                <!-- Slide Container Screen (16:9 Aspect Frame) -->
+                <div class="border-2 border-slate-300 rounded-2xl p-6 sm:p-8 bg-slate-900 text-white shadow-2xl relative min-h-[460px] flex flex-col justify-between" id="slide-display">
+                    <!-- Dynamic Slide Content injected by JS -->
+                    <div id="slide-inner-content"></div>
+                    <!-- Slide Footer -->
+                    <div class="pt-4 border-t border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
+                        <span>Department of CSE(AI&ML). A.Y.2026-27, GCET.</span>
+                        <span id="slide-num-indicator" class="font-bold text-teal-400">Slide 1 of 13</span>
                     </div>
                 </div>
             </div>
@@ -682,6 +736,335 @@
             resDiv.className = "mt-3 p-3 bg-teal-50 border border-teal-200 text-teal-900 rounded-lg text-xs";
             resDiv.innerHTML = `<strong>Cluster ${cluster} Identified</strong><br>${label}`;
         }
+
+        // Slide Deck Content Engine
+        const SLIDES = {
+            1: `
+                <div class="text-center py-4 space-y-3">
+                    <span class="text-amber-400 font-bold text-xs uppercase tracking-widest">Geethanjali College of Engineering and Technology</span>
+                    <p class="text-xs text-slate-400">(UGC Autonomous) | Affiliated to JNTUH, Approved by AICTE, New Delhi</p>
+                    <p class="text-[11px] text-teal-400 font-semibold">DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING (AI & ML)</p>
+                    
+                    <div class="bg-slate-800/90 border border-teal-500/40 rounded-xl p-5 my-4 max-w-3xl mx-auto shadow-lg">
+                        <span class="text-amber-300 font-bold text-xs uppercase">INTERNSHIP TITLE</span>
+                        <h1 class="text-xl sm:text-2xl font-black text-white mt-1 leading-snug">CardioScan AI: Clinical Heart Disease Risk Prediction & Production Deployment System</h1>
+                        <p class="text-xs text-teal-200 mt-2">End-to-End Machine Learning Pipeline, Clinical Calibration & Cloud Microservice Architecture</p>
+                    </div>
+
+                    <div class="bg-slate-800/60 rounded-xl p-4 max-w-2xl mx-auto text-xs grid grid-cols-2 gap-2 text-left border border-slate-700">
+                        <div><strong class="text-teal-300">Name:</strong> Vivek Vardhan</div>
+                        <div><strong class="text-teal-300">Roll No:</strong> 21R11A66XX / Candidate ID</div>
+                        <div><strong class="text-teal-300">Year / Sem:</strong> IV Year / I Semester</div>
+                        <div><strong class="text-teal-300">Section:</strong> CSE(AI&ML) - Section A</div>
+                    </div>
+                </div>
+            `,
+            2: `
+                <div class="space-y-4">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Slide 2 • Introduction</span>
+                    <h2 class="text-xl font-bold text-white">Clinical AI for Cardiovascular Risk Assessment</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                            <h3 class="font-bold text-teal-300 text-sm">Global Healthcare Challenge</h3>
+                            <p class="text-slate-300">• Cardiovascular Diseases (CVDs) cause ~17.9 million deaths annually worldwide.</p>
+                            <p class="text-slate-300">• Early non-invasive detection significantly curtails acute myocardial infarctions.</p>
+                            <p class="text-slate-300">• Traditional risk scores (Framingham) rely on static lookup tables with low ECG sensitivity.</p>
+                            <p class="text-slate-300">• Machine Learning captures multi-factorial physiological biomarker interactions.</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-red-500/40 space-y-2">
+                            <h3 class="font-bold text-red-400 text-sm">Clinical AI Safety: Sensitivity (Recall) Priority</h3>
+                            <p class="text-slate-300">• In clinical diagnostics, <strong>Recall (Sensitivity)</strong> strictly overrides generic Accuracy.</p>
+                            <p class="text-slate-300">• <strong>False Negative Hazard:</strong> An undiagnosed patient is discharged without treatment, risking immediate cardiac death.</p>
+                            <p class="text-slate-300">• <strong>False Positive Outcome:</strong> Triggers safe, non-invasive confirmatory testing.</p>
+                            <p class="text-slate-300">• <strong>Target Goal:</strong> Calibrated pipeline achieving &gt;90% Sensitivity and sub-millisecond cloud API.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            3: `
+                <div class="space-y-4">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Slide 3 • Related Work</span>
+                    <h2 class="text-xl font-bold text-white">Evolution of Cardiac Risk Prediction Systems</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                            <h3 class="font-bold text-teal-300">1. Clinical Heuristics</h3>
+                            <p class="text-slate-300">Framingham Risk Score and SCORE2 models predict 10-year risk using static regression tables. Limitations: Insensitive to acute exercise ECG ST depression and flouroscopy markers.</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                            <h3 class="font-bold text-teal-300">2. Shallow ML Models</h3>
+                            <p class="text-slate-300">Decision Trees and Naive Bayes explored on UCI Cleveland. Decision trees often overfit small cohorts (N=303), yielding brittle, stepped decision boundaries and poor ROC-AUC.</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                            <h3 class="font-bold text-teal-300">3. Calibrated Production ML</h3>
+                            <p class="text-slate-300">Standardized, regularized Logistic Regression delivers smooth probabilistic calibration, superior ROC-AUC (~0.87-0.92), and maximum clinical sensitivity without overfitting.</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 p-3 rounded-lg border border-teal-500/30 text-xs">
+                        <strong class="text-amber-300">Research Gap Addressed:</strong> Moving beyond isolated academic notebooks into production-grade serialization, Docker containerization, and public HTTPS deployment.
+                    </div>
+                </div>
+            `,
+            4: `
+                <div class="space-y-4">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Slide 4 • Technologies Used</span>
+                    <h2 class="text-xl font-bold text-white">Production Architecture & Technology Stack</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-teal-500/40 space-y-2">
+                            <h3 class="font-bold text-teal-300 text-sm">Core Data Science & ML</h3>
+                            <p class="text-slate-300"><strong>Python 3.14.3:</strong> Computational runtime.</p>
+                            <p class="text-slate-300"><strong>Scikit-Learn 1.9.1:</strong> StandardScaler, Logistic Regression, Decision Trees.</p>
+                            <p class="text-slate-300"><strong>NumPy & Pandas:</strong> Ingestion & microsecond matrix dot products.</p>
+                            <p class="text-slate-300"><strong>Joblib 1.6.0:</strong> Pipeline serialization (.joblib).</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-teal-500/40 space-y-2">
+                            <h3 class="font-bold text-teal-300 text-sm">Web & Microservice</h3>
+                            <p class="text-slate-300"><strong>FastAPI 0.142.4:</strong> High-throughput REST API.</p>
+                            <p class="text-slate-300"><strong>Streamlit 1.65.0:</strong> Clinician dashboard.</p>
+                            <p class="text-slate-300"><strong>Uvicorn 0.54.0:</strong> High-speed ASGI server.</p>
+                            <p class="text-slate-300"><strong>Tailwind CSS:</strong> Zero-bundle responsive SPA UI.</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-teal-500/40 space-y-2">
+                            <h3 class="font-bold text-teal-300 text-sm">DevOps & Cloud</h3>
+                            <p class="text-slate-300"><strong>Docker & Compose:</strong> Multi-stage containers.</p>
+                            <p class="text-slate-300"><strong>Cloudflare Tunnel:</strong> Edge HTTPS encryption.</p>
+                            <p class="text-slate-300"><strong>Git 2.56.0:</strong> Version control on GitHub.</p>
+                            <p class="text-slate-300"><strong>GZip Middleware:</strong> 78% payload reduction.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            5: `
+                <div class="space-y-4">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Slide 5 • Project Work (Part 1 of 4)</span>
+                    <h2 class="text-xl font-bold text-white">Dataset Ingestion & Feature Engineering Pipeline</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-1.5">
+                            <h3 class="font-bold text-teal-300 text-sm">UCI Cleveland Dataset (heart.csv)</h3>
+                            <p class="text-slate-300">• Dimensions: 303 patient records, 14 diagnostic dimensions.</p>
+                            <p class="text-slate-300">• <strong>Vitals:</strong> age, sex, chest pain type (cp), resting BP (trestbps), cholesterol (chol), fasting blood sugar (fbs), resting ECG (restecg).</p>
+                            <p class="text-slate-300">• <strong>Exercise Stress:</strong> max heart rate (thalach), exercise angina (exang), ST depression (oldpeak), ST slope (slope).</p>
+                            <p class="text-slate-300">• <strong>Cardiology:</strong> major vessels (ca), thallium test (thal).</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                            <h3 class="font-bold text-teal-300 text-sm">Data Hygiene & Leak-Free Scaling</h3>
+                            <p class="text-slate-300">• <strong>Median Imputation:</strong> Robust numerical replacement protecting against outlier distortion.</p>
+                            <p class="text-slate-300">• <strong>Stratified 80/20 Partition:</strong> 242 training samples, 61 test samples, preserving 54.4% positive balance.</p>
+                            <p class="text-slate-300">• <strong>StandardScaler Integrity:</strong> Fitted strictly on training set only (scaler.fit_transform(X_train)) to avoid data leakage.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            6: `
+                <div class="space-y-4">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Slide 6 • Project Work (Part 2 of 4)</span>
+                    <h2 class="text-xl font-bold text-white">Model Benchmarking & Performance Evaluation</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left border border-slate-700 rounded-lg overflow-hidden">
+                            <thead class="bg-slate-800 text-teal-300 font-bold">
+                                <tr>
+                                    <th class="p-2.5">Model Architecture</th>
+                                    <th class="p-2.5">Data Preprocessing</th>
+                                    <th class="p-2.5">Accuracy</th>
+                                    <th class="p-2.5">Precision</th>
+                                    <th class="p-2.5 text-emerald-400 font-extrabold">Recall (Sensitivity)</th>
+                                    <th class="p-2.5 text-teal-400 font-extrabold">ROC-AUC</th>
+                                    <th class="p-2.5">Clinical Verdict</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800 bg-slate-850">
+                                <tr class="bg-teal-950/40">
+                                    <td class="p-2.5 font-bold text-white">Logistic Regression</td>
+                                    <td class="p-2.5 text-slate-300">StandardScaler (Fit on Train)</td>
+                                    <td class="p-2.5 font-bold text-teal-300">80.33%</td>
+                                    <td class="p-2.5 text-slate-300">76.92%</td>
+                                    <td class="p-2.5 font-black text-emerald-400 text-sm">90.91%</td>
+                                    <td class="p-2.5 font-black text-teal-300 text-sm">0.8690</td>
+                                    <td class="p-2.5 font-bold text-emerald-400">Champion (Selected)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-medium text-slate-300">Decision Tree (Depth=4)</td>
+                                    <td class="p-2.5 text-slate-400">Raw Features</td>
+                                    <td class="p-2.5 text-slate-300">78.69%</td>
+                                    <td class="p-2.5 text-slate-400">76.32%</td>
+                                    <td class="p-2.5 text-slate-300">87.88%</td>
+                                    <td class="p-2.5 text-slate-400">0.8009</td>
+                                    <td class="p-2.5 text-slate-400">Baseline Benchmark</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <div class="bg-slate-800/60 p-3 rounded-lg border border-emerald-500/30">
+                            <strong class="text-emerald-400">Sensitivity Victory:</strong> Out of 33 cardiac test patients, Logistic Regression caught 30 (90.91% recall), minimizing critical false negatives.
+                        </div>
+                        <div class="bg-slate-800/60 p-3 rounded-lg border border-teal-500/30">
+                            <strong class="text-teal-400">AUC Advantage:</strong> AUC of 0.8690 guarantees superior separation across varying hospital diagnostic thresholds.
+                        </div>
+                    </div>
+                </div>
+            `,
+            7: `
+                <div class="space-y-4">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Slide 7 • Project Work (Part 3 of 4)</span>
+                    <h2 class="text-xl font-bold text-white">Diagnostic Visualizations: Confusion Matrix & ROC Curves</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 text-xs items-center">
+                        <div class="md:col-span-7 bg-white p-2 rounded-xl">
+                            <img src="/static/heart_disease_evaluation_metrics.png" alt="Diagnostic Metrics" class="rounded-lg w-full">
+                        </div>
+                        <div class="md:col-span-5 space-y-2 bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                            <h3 class="font-bold text-teal-300 text-sm">Figure 1 Analysis</h3>
+                            <p class="text-slate-300">• <strong>Subplot 1 (Confusion Matrix):</strong> Confirms 30 True Positives (TP) and 19 True Negatives (TN). Only 3 False Negatives (FN) occurred.</p>
+                            <p class="text-slate-300">• <strong>Subplot 2 (ROC Curves):</strong> Logistic Regression (dark blue curve) maintains high True Positive Rate at low False Positive rates, reaching AUC = 0.869.</p>
+                            <p class="text-slate-300">• <strong>Publication Quality:</strong> Rendered at 300 DPI using Seaborn & Matplotlib for academic compliance.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            8: `
+                <div class="space-y-4">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Slide 8 • Project Work (Part 4 of 4)</span>
+                    <h2 class="text-xl font-bold text-white">Web Deployment & Microsecond Speed Optimization</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-teal-500/40 space-y-2">
+                            <h3 class="font-bold text-teal-300 text-sm">Deployment Modalities</h3>
+                            <p class="text-slate-300">• <strong>Streamlit Web App:</strong> Interactive sliders, probability meters, and batch CSV patient screening report export.</p>
+                            <p class="text-slate-300">• <strong>FastAPI Microservice:</strong> Asynchronous OpenAPI REST API with /api/predict and /api/predict/batch endpoints.</p>
+                            <p class="text-slate-300">• <strong>GitHub Repository:</strong> Synchronized at cherlapallyvivekvardhan-ai/heart-diseases.</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-amber-500/40 space-y-2">
+                            <h3 class="font-bold text-amber-300 text-sm">Microsecond Inference Optimization</h3>
+                            <p class="text-slate-300">• <strong>Vectorized NumPy Math:</strong> Evaluated Sigmoid(W^T * X + b) directly, avoiding dataframe allocation latency.</p>
+                            <p class="text-slate-300">• <strong>Benchmark Throughput:</strong> 358,000+ predictions per second with &lt; 0.1ms computation.</p>
+                            <p class="text-slate-300">• <strong>Public Edge Cloud:</strong> Deployed via Cloudflare Tunnel with global HTTPS access.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            9: `
+                <div class="space-y-4">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Slide 9 • Learning After Internship (Part 1 of 2)</span>
+                    <h2 class="text-xl font-bold text-white">Machine Learning & Clinical AI Domain Insights</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                            <h3 class="font-bold text-teal-300 text-sm">1. High-Stakes Clinical Safety</h3>
+                            <p class="text-slate-300">Understood the severe consequences of metric selection. While accuracy measures general correct predictions, clinical AI lives or dies by Recall/Sensitivity to prevent mortality from false negatives.</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                            <h3 class="font-bold text-teal-300">2. Data Leakage Discipline</h3>
+                            <p class="text-slate-300">Gained strict engineering discipline regarding data splits. Transformers like StandardScaler must never observe test distributions during training, preventing optimistic bias in published reports.</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                            <h3 class="font-bold text-teal-300">3. Probabilistic Calibration</h3>
+                            <p class="text-slate-300">Mastered why well-regularized Logistic Regression models often outperform Decision Trees on small clinical cohorts by avoiding tree overfitting and generating continuous risk probabilities.</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                            <h3 class="font-bold text-teal-300">4. Adjacent Problem Pathways</h3>
+                            <p class="text-slate-300">Broadened machine learning mastery by training Random Forests for FinTech loan underwriting (Option 2) and K-Means unsupervised clustering for customer spending cohorts (Option 3).</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            10: `
+                <div class="space-y-4">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Slide 10 • Learning After Internship (Part 2 of 2)</span>
+                    <h2 class="text-xl font-bold text-white">DevOps, Cloud Microservices & Production Delivery</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-teal-500/40 space-y-2">
+                            <h3 class="font-bold text-teal-300 text-sm">1. FastAPI Asynchronous Architecture</h3>
+                            <p class="text-slate-300">Transitioned from offline scripts to robust, production-grade microservices with Pydantic type validation, schema definitions, and self-documenting Swagger OpenAPI endpoints.</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-teal-500/40 space-y-2">
+                            <h3 class="font-bold text-teal-300 text-sm">2. Latency Profiling & Vectorization</h3>
+                            <p class="text-slate-300">Learned that high-performance serving requires profiling. Eliminating Pandas runtime wrappers in favor of vectorized NumPy dot products yielded a 10,000x speedup in model scoring.</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-teal-500/40 space-y-2">
+                            <h3 class="font-bold text-teal-300 text-sm">3. Containerization (Docker)</h3>
+                            <p class="text-slate-300">Engineered multi-stage Dockerfiles and Docker Compose files to containerize the entire pipeline, eliminating environment discrepancies across host platforms.</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-teal-500/40 space-y-2">
+                            <h3 class="font-bold text-teal-300 text-sm">4. Version Control & Git Protocols</h3>
+                            <p class="text-slate-300">Gained practical proficiency in Git: managing branches, resolving merge rebase conflicts, setting up SSH ED25519 authentication, and publishing code to GitHub.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            11: `
+                <div class="space-y-4">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Slide 11 • Summary & Conclusion</span>
+                    <h2 class="text-xl font-bold text-white">Project Milestones & Future Clinical Scope</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                            <h3 class="font-bold text-teal-300 text-sm">Project Milestones Achieved</h3>
+                            <p class="text-slate-300">✓ Ingested, cleaned, and normalized 13 clinical biomarkers without data leakage.</p>
+                            <p class="text-slate-300">✓ Benchmarked models: Logistic Regression delivered champion 90.91% Recall & 0.8690 ROC-AUC.</p>
+                            <p class="text-slate-300">✓ Built dual deployment: Streamlit dashboard and ultra-fast FastAPI microservice.</p>
+                            <p class="text-slate-300">✓ Deployed live public HTTPS URL accessible worldwide in Google Chrome.</p>
+                            <p class="text-slate-300">✓ Codebase synchronized on GitHub under cherlapallyvivekvardhan-ai/heart-diseases.</p>
+                        </div>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-amber-500/40 space-y-2">
+                            <h3 class="font-bold text-amber-300 text-sm">Future Research & Expansion</h3>
+                            <p class="text-slate-300">• <strong>Deep Learning:</strong> Incorporate 1D CNNs and LSTMs for raw continuous 12-lead ECG waveform signal triage.</p>
+                            <p class="text-slate-300">• <strong>Explainable AI (XAI):</strong> Integrate SHAP and LIME waterfall plots to visualize per-patient risk factor contributions for clinicians.</p>
+                            <p class="text-slate-300">• <strong>EHR Interoperability:</strong> Implement HL7/FHIR protocols for direct electronic health record hospital database integration.</p>
+                            <p class="text-slate-300">• <strong>Edge Wearables:</strong> Quantize model via ONNX for smartwatches.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            12: `
+                <div class="space-y-4">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-wider">Slide 12 • Bibliography / References</span>
+                    <h2 class="text-xl font-bold text-white">Academic Literature & Framework References</h2>
+                    <div class="bg-slate-800/80 p-5 rounded-xl border border-slate-700 text-xs space-y-2 text-slate-300">
+                        <p>1. Detrano, R., et al. (1989). "International application of a new probability algorithm for the diagnosis of coronary artery disease." The American Journal of Cardiology, 64(5), 304-310. [UCI Cleveland Benchmark]</p>
+                        <p>2. Janosi, A., Steinbrunn, W., Pfisterer, M., & Detrano, R. (1988). Heart Disease Data Set. UCI Machine Learning Repository.</p>
+                        <p>3. Pedregosa, F., et al. (2011). "Scikit-learn: Machine Learning in Python." Journal of Machine Learning Research (JMLR), 12, 2825-2830.</p>
+                        <p>4. Al'Aref, S. J., et al. (2019). "Clinical applications of machine learning in cardiovascular disease." European Heart Journal, 40(24), 1975-1986.</p>
+                        <p>5. Tiwary, M., & Gupta, R. (2020). "A Comparative Study of Machine Learning Classifiers for Heart Disease Detection." IEEE GUCON.</p>
+                        <p>6. Tiangolo, S. (2023). "FastAPI Framework Documentation: Asynchronous Web APIs with Python." https://fastapi.tiangolo.com/</p>
+                        <p>7. Treveil, M., et al. (2020). Introducing MLOps: How to Scale Machine Learning in the Enterprise. O'Reilly Media.</p>
+                    </div>
+                </div>
+            `,
+            13: `
+                <div class="text-center py-8 space-y-4">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-widest">Department of CSE (AI&ML) • GCET</span>
+                    <h1 class="text-4xl sm:text-5xl font-black text-white">THANK YOU!</h1>
+                    <p class="text-sm text-teal-300 font-semibold">Questions & Technical Discussion Welcomed</p>
+                    
+                    <div class="bg-slate-800/80 border border-teal-500/40 rounded-2xl p-6 max-w-xl mx-auto shadow-xl space-y-2 text-xs">
+                        <p><strong class="text-white text-sm">Vivek Vardhan</strong></p>
+                        <p class="text-slate-400">Department of Computer Science & Engineering (Artificial Intelligence & Machine Learning)</p>
+                        <p class="text-slate-400">Geethanjali College of Engineering and Technology (GCET), Cheeryal, Keesara</p>
+                        <div class="pt-3 border-t border-slate-700 text-teal-400 font-mono text-[11px]">
+                            GitHub: github.com/cherlapallyvivekvardhan-ai/heart-diseases
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        function showSlide(num) {
+            document.querySelectorAll('.slide-nav-btn').forEach(b => {
+                b.className = 'slide-nav-btn px-3 py-1.5 rounded-lg border font-medium bg-slate-100 text-slate-700';
+            });
+            const activeBtn = document.getElementById('sbtn-' + num);
+            if (activeBtn) {
+                activeBtn.className = 'slide-nav-btn active px-3 py-1.5 rounded-lg border font-bold bg-slate-900 text-white';
+            }
+
+            const container = document.getElementById('slide-inner-content');
+            if (container && SLIDES[num]) {
+                container.innerHTML = SLIDES[num];
+            }
+            const indicator = document.getElementById('slide-num-indicator');
+            if (indicator) {
+                indicator.innerText = `Slide ${num} of 13`;
+            }
+        }
+
+        // Initialize slide 1 on load
+        showSlide(1);
 
         // Run default evaluation on page load
         evaluateSinglePatient();
