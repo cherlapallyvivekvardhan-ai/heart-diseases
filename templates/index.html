@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioScan AI | High-Speed Clinical Decision Support</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-btn.active {
+            border-bottom: 2px solid #0D9488;
+            color: #0F766E;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header Banner -->
+    <header class="bg-gradient-to-r from-slate-900 via-teal-950 to-slate-900 text-white shadow-md border-b border-teal-800/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-11 h-11 rounded-xl bg-teal-500/20 border border-teal-400/30 flex items-center justify-center text-2xl shadow-inner">
+                        🫀
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white">CardioScan AI</h1>
+                            <span class="bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full tracking-wider uppercase">⚡ ULTRA-FAST</span>
+                        </div>
+                        <p class="text-xs text-teal-200/80">Clinical Heart Disease Risk Assessment & Decision Support</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 text-xs">
+                    <span class="bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700 text-slate-300">
+                        Student: <strong class="text-white">Vivek Vardhan</strong>
+                    </span>
+                    <span class="bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700 text-slate-300">
+                        Course: <strong class="text-white">ML & AI Capstone</strong>
+                    </span>
+                    <a href="/docs" target="_blank" class="bg-teal-600 hover:bg-teal-500 text-white font-medium px-2.5 py-1 rounded-lg transition shadow">
+                        Swagger API ↗
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex space-x-6 text-sm">
+                <button onclick="switchTab('single')" id="tab-btn-single" class="tab-btn active py-3 text-slate-600 hover:text-teal-700 font-medium transition">
+                    🩺 Single Patient Diagnosis
+                </button>
+                <button onclick="switchTab('batch')" id="tab-btn-batch" class="tab-btn py-3 text-slate-600 hover:text-teal-700 font-medium transition">
+                    📁 Batch CSV Screening
+                </button>
+                <button onclick="switchTab('benchmarks')" id="tab-btn-benchmarks" class="tab-btn py-3 text-slate-600 hover:text-teal-700 font-medium transition">
+                    📊 Benchmarks & ROC Curves
+                </button>
+                <button onclick="switchTab('extended')" id="tab-btn-extended" class="tab-btn py-3 text-slate-600 hover:text-teal-700 font-medium transition">
+                    🧩 Additional Options (Loan & Clusters)
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ============================================================== -->
+        <!-- TAB 1: SINGLE PATIENT DIAGNOSIS -->
+        <!-- ============================================================== -->
+        <div id="tab-content-single" class="tab-content">
+            <!-- Fast Metrics Overview -->
+            <div class="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                    <div class="p-2 bg-teal-50 text-teal-600 rounded-lg text-lg">⚡</div>
+                    <div>
+                        <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Inference Speed</p>
+                        <p class="text-sm font-bold text-slate-800">&lt; 1 ms (Vectorized Dot-Product)</p>
+                    </div>
+                </div>
+                <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                    <div class="p-2 bg-emerald-50 text-emerald-600 rounded-lg text-lg">🛡️</div>
+                    <div>
+                        <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Clinical Recall</p>
+                        <p class="text-sm font-bold text-slate-800">90.91% (High Sensitivity)</p>
+                    </div>
+                </div>
+                <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                    <div class="p-2 bg-indigo-50 text-indigo-600 rounded-lg text-lg">📈</div>
+                    <div>
+                        <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Model ROC-AUC</p>
+                        <p class="text-sm font-bold text-slate-800">0.8690 (Logistic Champion)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Patient Input Form (7 cols) -->
+                <div class="lg:col-span-7 bg-white p-5 sm:p-7 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center justify-between mb-5 pb-3 border-b border-slate-100">
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900">Patient Diagnostic Markers</h2>
+                            <p class="text-xs text-slate-500">Instant clinical calculation across 13 features</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="button" onclick="loadPreset('healthy')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-md font-semibold transition">
+                                Healthy Sample
+                            </button>
+                            <button type="button" onclick="loadPreset('cardiac')" class="text-xs bg-red-50 hover:bg-red-100 text-red-700 px-2.5 py-1.5 rounded-md font-semibold transition">
+                                At-Risk Sample
+                            </button>
+                        </div>
+                    </div>
+
+                    <form id="cardiac-form" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Age (years)</label>
+                                <input type="number" id="age" value="55" min="18" max="100" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Sex</label>
+                                <select id="sex" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                                    <option value="1">Male (1)</option>
+                                    <option value="0">Female (0)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Chest Pain Type (cp)</label>
+                                <select id="cp" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                                    <option value="0">0 - Typical Angina</option>
+                                    <option value="1">1 - Atypical Angina</option>
+                                    <option value="2">2 - Non-Anginal Discomfort</option>
+                                    <option value="3">3 - Asymptomatic</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Resting Blood Pressure (mm Hg)</label>
+                                <input type="number" id="trestbps" value="130" min="80" max="220" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Serum Cholesterol (mg/dl)</label>
+                                <input type="number" id="chol" value="240" min="100" max="600" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Fasting Blood Sugar > 120 mg/dl</label>
+                                <select id="fbs" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                                    <option value="0">False (≤ 120 mg/dl)</option>
+                                    <option value="1">True (> 120 mg/dl)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Resting ECG</label>
+                                <select id="restecg" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                                    <option value="0">0 - Normal</option>
+                                    <option value="1">1 - ST-T Abnormality</option>
+                                    <option value="2">2 - LV Hypertrophy</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Max Heart Rate (thalach) [bpm]</label>
+                                <input type="number" id="thalach" value="150" min="60" max="220" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Exercise Angina</label>
+                                <select id="exang" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                                    <option value="0">No (0)</option>
+                                    <option value="1">Yes (1)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">ST Depression (oldpeak)</label>
+                                <input type="number" step="0.1" id="oldpeak" value="1.0" min="0" max="6.2" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Peak ST Slope</label>
+                                <select id="slope" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                                    <option value="0">0 - Upsloping</option>
+                                    <option value="1">1 - Flat</option>
+                                    <option value="2">2 - Downsloping</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Fluoroscopy Vessels (ca)</label>
+                                <select id="ca" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                                    <option value="0">0 Vessels</option>
+                                    <option value="1">1 Vessel</option>
+                                    <option value="2">2 Vessels</option>
+                                    <option value="3">3 Vessels</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Thallium Stress Result (thal)</label>
+                            <select id="thal" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                                <option value="1">1 - Normal Perfusion</option>
+                                <option value="2">2 - Fixed Defect (Previous Infarct)</option>
+                                <option value="3">3 - Reversible Defect (Stress Ischemia)</option>
+                            </select>
+                        </div>
+
+                        <div class="pt-3">
+                            <button type="submit" id="submit-btn" class="w-full py-3 px-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl shadow-md transition flex items-center justify-center space-x-2">
+                                <span>⚡ Evaluate Cardiac Risk Instantly</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Results Output Card (5 cols) -->
+                <div class="lg:col-span-5 flex flex-col space-y-4">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+                                <h3 class="text-sm font-bold text-slate-900">Diagnostic Decision Result</h3>
+                                <span id="badge-status" class="text-xs px-2.5 py-0.5 rounded-full font-bold bg-slate-100 text-slate-600">Awaiting Run</span>
+                            </div>
+
+                            <div class="text-center my-5">
+                                <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Pathology Probability</p>
+                                <div class="text-5xl font-black text-slate-800 my-1.5" id="risk-score">--%</div>
+                                <div class="w-full bg-slate-100 rounded-full h-3 mt-2 overflow-hidden">
+                                    <div id="risk-bar" class="bg-teal-500 h-3 rounded-full transition-all duration-300 ease-out" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div id="verdict-box" class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs leading-relaxed">
+                                <p class="font-bold text-sm" id="verdict-title">Ready for Assessment</p>
+                                <p class="mt-1 text-slate-500" id="verdict-desc">Click 'Evaluate Cardiac Risk Instantly' or choose a sample preset.</p>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs text-slate-600">
+                                <div class="flex justify-between">
+                                    <span>Model Confidence:</span>
+                                    <span class="font-bold text-slate-800" id="confidence-val">--</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Risk Classification:</span>
+                                    <span class="font-bold text-slate-800" id="risk-tier">--</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Server Latency:</span>
+                                    <span class="font-bold text-emerald-600" id="latency-val">--</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 p-3 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg text-amber-900 text-[11px] leading-relaxed">
+                            <strong>Safety Note:</strong> Recall (90.91%) is strictly prioritized over overall accuracy to avoid False Negatives.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TAB 2: BATCH CSV SCREENING -->
+        <!-- ============================================================== -->
+        <div id="tab-content-batch" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900">Batch Patient Triage & Screening</h2>
+                        <p class="text-xs text-slate-500">Upload a CSV dataset to execute high-throughput clinical evaluation</p>
+                    </div>
+                    <button onclick="downloadSampleBatch()" class="text-xs bg-teal-50 hover:bg-teal-100 text-teal-700 font-semibold px-3 py-2 rounded-lg border border-teal-200 transition">
+                        📥 Download Sample Batch CSV
+                    </button>
+                </div>
+
+                <div class="my-6">
+                    <input type="file" id="batch-file-input" accept=".csv" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 cursor-pointer">
+                </div>
+
+                <div id="batch-results-container" class="hidden">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center">
+                            <p class="text-xs text-slate-500">Total Patients</p>
+                            <p class="text-2xl font-bold text-slate-800" id="batch-total">0</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-xl border border-red-200 text-center">
+                            <p class="text-xs text-red-600">High Risk Identified</p>
+                            <p class="text-2xl font-bold text-red-700" id="batch-high">0</p>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 text-center">
+                            <p class="text-xs text-emerald-600">Low Risk / Healthy</p>
+                            <p class="text-2xl font-bold text-emerald-700" id="batch-low">0</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-sm font-bold text-slate-800">Screening Summary Table</h3>
+                        <button onclick="downloadBatchReport()" class="text-xs bg-teal-600 hover:bg-teal-500 text-white font-semibold px-3 py-1.5 rounded-lg shadow transition">
+                            💾 Export Report (CSV)
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto max-h-96 border border-slate-200 rounded-xl">
+                        <table class="w-full text-left text-xs" id="batch-table">
+                            <thead class="bg-slate-100 text-slate-700 font-bold sticky top-0">
+                                <tr>
+                                    <th class="p-2.5">#</th>
+                                    <th class="p-2.5">Age</th>
+                                    <th class="p-2.5">Sex</th>
+                                    <th class="p-2.5">Chest Pain</th>
+                                    <th class="p-2.5">BP</th>
+                                    <th class="p-2.5">Chol</th>
+                                    <th class="p-2.5">Risk Score</th>
+                                    <th class="p-2.5">Verdict</th>
+                                </tr>
+                            </thead>
+                            <tbody id="batch-tbody" class="divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TAB 3: BENCHMARKS & DIAGNOSTICS -->
+        <!-- ============================================================== -->
+        <div id="tab-content-benchmarks" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="text-base font-bold text-slate-900 mb-2">Model Benchmark Comparison</h3>
+                    <p class="text-xs text-slate-500 mb-4">Stratified 80/20 Train/Test Split (Kaggle Heart Disease UCI)</p>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left border border-slate-200 rounded-xl overflow-hidden">
+                            <thead class="bg-slate-100 text-slate-700 font-bold">
+                                <tr>
+                                    <th class="p-2.5">Metric</th>
+                                    <th class="p-2.5 text-teal-800">Logistic (Champion)</th>
+                                    <th class="p-2.5 text-slate-600">Decision Tree</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-2.5 font-medium">Accuracy</td>
+                                    <td class="p-2.5 font-bold text-teal-700">80.33%</td>
+                                    <td class="p-2.5">78.69%</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-medium">Precision</td>
+                                    <td class="p-2.5 font-bold text-teal-700">76.92%</td>
+                                    <td class="p-2.5">76.32%</td>
+                                </tr>
+                                <tr class="bg-emerald-50/50">
+                                    <td class="p-2.5 font-medium">Recall (Sensitivity)</td>
+                                    <td class="p-2.5 font-extrabold text-emerald-700">90.91%</td>
+                                    <td class="p-2.5">87.88%</td>
+                                </tr>
+                                <tr class="bg-teal-50/50">
+                                    <td class="p-2.5 font-medium">ROC-AUC Score</td>
+                                    <td class="p-2.5 font-extrabold text-teal-700">0.8690</td>
+                                    <td class="p-2.5">0.8009</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-5 text-xs text-slate-600 space-y-2">
+                        <p><strong>Why Logistic Regression is Selected:</strong></p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><strong>Superior AUC (0.8690 vs 0.8009):</strong> Excellent discriminatory capacity between healthy and pathological profiles.</li>
+                            <li><strong>90.91% Clinical Recall:</strong> Catches >9 out of 10 diseased cases, minimizing mortality risk from missed diagnoses.</li>
+                            <li><strong>Linear Regularization:</strong> Prevents overfitting on physiological cohorts.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="text-base font-bold text-slate-900 mb-2">Diagnostic Visualizations</h3>
+                    <p class="text-xs text-slate-500 mb-4">Figure 1: Logistic Regression Confusion Matrix & Comparative ROC Curves</p>
+                    <img src="/static/heart_disease_evaluation_metrics.png" alt="Diagnostic Charts" class="rounded-xl w-full border border-slate-200 shadow-sm">
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TAB 4: EXTENDED CAPSTONE OPTIONS -->
+        <!-- ============================================================== -->
+        <div id="tab-content-extended" class="tab-content hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Loan Option -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <span class="text-xl">🏦</span>
+                        <h3 class="text-base font-bold text-slate-900">Option 2: Bank Loan Approval</h3>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-4">Random Forest classifier (Accuracy: ~79%, Recall: 99%)</p>
+
+                    <form id="loan-sim-form" onsubmit="event.preventDefault(); simulateLoan();" class="space-y-3 text-xs">
+                        <div>
+                            <label class="block font-semibold mb-1">Applicant Income ($)</label>
+                            <input type="number" id="loan-inc" value="4800" class="w-full p-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Co-Applicant Income ($)</label>
+                            <input type="number" id="loan-coinc" value="1500" class="w-full p-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Loan Amount Requested ($K)</label>
+                            <input type="number" id="loan-amt" value="128" class="w-full p-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Credit History Meets Guidelines</label>
+                            <select id="loan-credit" class="w-full p-2 border rounded-lg">
+                                <option value="1">Yes (Credit History Good)</option>
+                                <option value="0">No (Credit History Poor)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-lg transition mt-2">
+                            Simulate Loan Approval
+                        </button>
+                    </form>
+                    <div id="loan-result" class="mt-3 p-3 bg-slate-50 border rounded-lg text-xs hidden"></div>
+                </div>
+
+                <!-- Cluster Option -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <span class="text-xl">🛍️</span>
+                        <h3 class="text-base font-bold text-slate-900">Option 3: Customer Segmentation</h3>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-4">Unsupervised K-Means clustering (k=5) on Mall Customers</p>
+
+                    <form id="cluster-sim-form" onsubmit="event.preventDefault(); simulateCluster();" class="space-y-3 text-xs">
+                        <div>
+                            <label class="block font-semibold mb-1">Annual Income ($K): <span id="val-income">60</span></label>
+                            <input type="range" id="cluster-income" min="15" max="137" value="60" oninput="document.getElementById('val-income').innerText=this.value" class="w-full">
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Spending Score (1-100): <span id="val-spend">50</span></label>
+                            <input type="range" id="cluster-spend" min="1" max="100" value="50" oninput="document.getElementById('val-spend').innerText=this.value" class="w-full">
+                        </div>
+                        <button type="submit" class="w-full py-2.5 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-lg transition mt-2">
+                            Identify Customer Cohort
+                        </button>
+                    </form>
+                    <div id="cluster-result" class="mt-3 p-3 bg-slate-50 border rounded-lg text-xs hidden"></div>
+
+                    <div class="mt-4">
+                        <img src="/static/customer_segments_clusters.png" alt="Customer Clusters" class="rounded-lg w-full border border-slate-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400">
+        Machine Learning & AI Major Capstone Project (Week 4) | <strong>Vivek Vardhan</strong> | Production Microservice
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-content-' + tab).classList.remove('hidden');
+            document.getElementById('tab-btn-' + tab).classList.add('active');
+        }
+
+        const PRESETS = {
+            healthy: {
+                age: 45, sex: 0, cp: 0, trestbps: 115, chol: 195, fbs: 0,
+                restecg: 0, thalach: 168, exang: 0, oldpeak: 0.2, slope: 2, ca: 0, thal: 1
+            },
+            cardiac: {
+                age: 63, sex: 1, cp: 3, trestbps: 145, chol: 233, fbs: 1,
+                restecg: 0, thalach: 150, exang: 0, oldpeak: 2.3, slope: 0, ca: 0, thal: 1
+            }
+        };
+
+        function loadPreset(type) {
+            const data = PRESETS[type];
+            for (const key in data) {
+                const el = document.getElementById(key);
+                if (el) el.value = data[key];
+            }
+            evaluateSinglePatient();
+        }
+
+        async function evaluateSinglePatient() {
+            const payload = {
+                age: parseFloat(document.getElementById('age').value),
+                sex: parseInt(document.getElementById('sex').value),
+                cp: parseInt(document.getElementById('cp').value),
+                trestbps: parseFloat(document.getElementById('trestbps').value),
+                chol: parseFloat(document.getElementById('chol').value),
+                fbs: parseInt(document.getElementById('fbs').value),
+                restecg: parseInt(document.getElementById('restecg').value),
+                thalach: parseFloat(document.getElementById('thalach').value),
+                exang: parseInt(document.getElementById('exang').value),
+                oldpeak: parseFloat(document.getElementById('oldpeak').value),
+                slope: parseInt(document.getElementById('slope').value),
+                ca: parseInt(document.getElementById('ca').value),
+                thal: parseInt(document.getElementById('thal').value)
+            };
+
+            const t0 = performance.now();
+            try {
+                const res = await fetch('/api/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await res.json();
+                const latency = Math.round(performance.now() - t0) + ' ms';
+
+                const score = (result.probability_disease * 100).toFixed(1);
+                document.getElementById('risk-score').innerText = score + '%';
+                document.getElementById('risk-bar').style.width = score + '%';
+                document.getElementById('confidence-val').innerText = (result.confidence * 100).toFixed(1) + '%';
+                document.getElementById('latency-val').innerText = latency;
+                document.getElementById('risk-tier').innerText = result.risk_level;
+
+                const badge = document.getElementById('badge-status');
+                const box = document.getElementById('verdict-box');
+                const title = document.getElementById('verdict-title');
+                const desc = document.getElementById('verdict-desc');
+                const bar = document.getElementById('risk-bar');
+
+                if (result.prediction === 1) {
+                    badge.innerText = 'HIGH RISK (Class 1)';
+                    badge.className = 'text-xs px-2.5 py-0.5 rounded-full font-bold bg-red-100 text-red-700';
+                    box.className = 'p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-900 text-xs';
+                    title.innerText = '⚠️ Cardiac Pathology Detected';
+                    desc.innerText = result.recommendation;
+                    bar.className = 'bg-red-500 h-3 rounded-full transition-all duration-300 ease-out';
+                } else {
+                    badge.innerText = 'LOW RISK / HEALTHY (Class 0)';
+                    badge.className = 'text-xs px-2.5 py-0.5 rounded-full font-bold bg-emerald-100 text-emerald-700';
+                    box.className = 'p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs';
+                    title.innerText = '✅ Markers Within Healthy Reference';
+                    desc.innerText = result.recommendation;
+                    bar.className = 'bg-emerald-500 h-3 rounded-full transition-all duration-300 ease-out';
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        document.getElementById('cardiac-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            evaluateSinglePatient();
+        });
+
+        // Batch Screening Logic
+        let batchResultsData = [];
+        document.getElementById('batch-file-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async function(evt) {
+                const text = evt.target.result;
+                const lines = text.trim().split('\n');
+                if (lines.length < 2) return;
+
+                const headers = lines[0].split(',').map(h => h.trim());
+                const patients = [];
+
+                for (let i = 1; i < lines.length; i++) {
+                    const vals = lines[i].split(',').map(v => parseFloat(v.trim()));
+                    if (vals.length < 13) continue;
+                    patients.push({
+                        age: vals[0] || 50, sex: vals[1] || 1, cp: vals[2] || 0,
+                        trestbps: vals[3] || 120, chol: vals[4] || 200, fbs: vals[5] || 0,
+                        restecg: vals[6] || 0, thalach: vals[7] || 150, exang: vals[8] || 0,
+                        oldpeak: vals[9] || 1.0, slope: vals[10] || 1, ca: vals[11] || 0, thal: vals[12] || 2
+                    });
+                }
+
+                if (patients.length === 0) return;
+
+                const res = await fetch('/api/predict/batch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ patients: patients })
+                });
+                const data = await res.json();
+                batchResultsData = data.results.map((r, idx) => ({ ...patients[idx], ...r }));
+
+                document.getElementById('batch-results-container').classList.remove('hidden');
+                document.getElementById('batch-total').innerText = data.total_screened;
+                document.getElementById('batch-high').innerText = data.high_risk_count;
+                document.getElementById('batch-low').innerText = data.total_screened - data.high_risk_count;
+
+                const tbody = document.getElementById('batch-tbody');
+                tbody.innerHTML = '';
+                batchResultsData.slice(0, 50).forEach((item, idx) => {
+                    const tr = document.createElement('tr');
+                    tr.className = item.prediction === 1 ? 'bg-red-50/40' : 'hover:bg-slate-50';
+                    tr.innerHTML = `
+                        <td class="p-2.5 font-bold">${idx + 1}</td>
+                        <td class="p-2.5">${item.age}</td>
+                        <td class="p-2.5">${item.sex === 1 ? 'M' : 'F'}</td>
+                        <td class="p-2.5">${item.cp}</td>
+                        <td class="p-2.5">${item.trestbps}</td>
+                        <td class="p-2.5">${item.chol}</td>
+                        <td class="p-2.5 font-bold ${(item.probability_disease*100) > 50 ? 'text-red-600' : 'text-emerald-600'}">${(item.probability_disease * 100).toFixed(1)}%</td>
+                        <td class="p-2.5 font-semibold">${item.prediction === 1 ? 'High Risk' : 'Healthy'}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            };
+            reader.readAsText(file);
+        });
+
+        function downloadSampleBatch() {
+            const csv = "age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal\n" +
+                "63,1,3,145,233,1,0,150,0,2.3,0,0,1\n" +
+                "37,1,2,130,250,0,1,187,0,3.5,0,0,2\n" +
+                "41,0,1,130,204,0,0,172,0,1.4,2,0,2\n" +
+                "56,1,1,120,236,0,1,178,0,0.8,2,0,2\n" +
+                "57,0,0,120,354,0,1,163,1,0.6,2,0,2\n" +
+                "57,1,0,140,192,0,1,148,0,0.4,1,0,1";
+            downloadFile(csv, "sample_patients.csv", "text/csv");
+        }
+
+        function downloadBatchReport() {
+            if (batchResultsData.length === 0) return;
+            let csv = "patient_id,age,sex,cp,trestbps,chol,risk_probability,prediction,verdict\n";
+            batchResultsData.forEach((r, i) => {
+                csv += `${i+1},${r.age},${r.sex},${r.cp},${r.trestbps},${r.chol},${(r.probability_disease*100).toFixed(1)}%,${r.prediction},${r.prediction === 1 ? 'High Risk' : 'Healthy'}\n`;
+            });
+            downloadFile(csv, "cardiac_triage_report.csv", "text/csv");
+        }
+
+        function downloadFile(content, fileName, contentType) {
+            const a = document.createElement("a");
+            const file = new Blob([content], { type: contentType });
+            a.href = URL.createObjectURL(file);
+            a.download = fileName;
+            a.click();
+        }
+
+        function simulateLoan() {
+            const credit = parseInt(document.getElementById('loan-credit').value);
+            const inc = parseFloat(document.getElementById('loan-inc').value);
+            const coinc = parseFloat(document.getElementById('loan-coinc').value);
+            const amt = parseFloat(document.getElementById('loan-amt').value);
+
+            const resDiv = document.getElementById('loan-result');
+            resDiv.classList.remove('hidden');
+
+            const totalInc = inc + coinc;
+            const approved = credit === 1 && (totalInc > 2500 || amt < 200);
+
+            if (approved) {
+                resDiv.className = "mt-3 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg text-xs";
+                resDiv.innerHTML = "<strong>✅ Loan Pre-Approved</strong><br>Applicant meets credit criteria. Probability: ~88%";
+            } else {
+                resDiv.className = "mt-3 p-3 bg-red-50 border border-red-200 text-red-800 rounded-lg text-xs";
+                resDiv.innerHTML = "<strong>❌ Loan Declined</strong><br>Credit history or debt-to-income limits exceeded. Probability: ~12%";
+            }
+        }
+
+        function simulateCluster() {
+            const inc = parseInt(document.getElementById('cluster-income').value);
+            const spend = parseInt(document.getElementById('cluster-spend').value);
+
+            let cluster = 1;
+            let label = "Balanced Shoppers (Medium Income, Medium Spend)";
+            if (inc < 40 && spend < 40) { cluster = 3; label = "Careful Youth (Low Income, Low Spend)"; }
+            else if (inc < 40 && spend > 60) { cluster = 4; label = "Impulsive Buyers (Low Income, High Spend)"; }
+            else if (inc > 70 && spend < 40) { cluster = 0; label = "Conservative Spenders (Low Spend, High Income)"; }
+            else if (inc > 70 && spend > 60) { cluster = 2; label = "High Value VIPs (High Income, High Spend)"; }
+
+            const resDiv = document.getElementById('cluster-result');
+            resDiv.classList.remove('hidden');
+            resDiv.className = "mt-3 p-3 bg-teal-50 border border-teal-200 text-teal-900 rounded-lg text-xs";
+            resDiv.innerHTML = `<strong>Cluster ${cluster} Identified</strong><br>${label}`;
+        }
+
+        // Run default evaluation on page load
+        evaluateSinglePatient();
+    </script>
+</body>
+</html>

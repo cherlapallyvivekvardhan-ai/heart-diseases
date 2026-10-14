@@ -1,0 +1,16 @@
+[browser]
+gatherUsageStats = false
+
+[server]
+enableCORS = false
+enableXsrfProtection = false
+enableWebsocketCompression = true
+headless = true
+fileWatcherType = "none"
+
+[runner]
+fastReruns = true
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = false

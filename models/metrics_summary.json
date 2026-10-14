@@ -1,0 +1,30 @@
+{
+  "dataset_rows": 303,
+  "logistic_regression": {
+    "accuracy": 0.8033,
+    "precision": 0.7692,
+    "recall": 0.9091,
+    "auc": 0.869
+  },
+  "decision_tree": {
+    "accuracy": 0.7869,
+    "precision": 0.7632,
+    "recall": 0.8788,
+    "auc": 0.8009
+  },
+  "features": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ]
+}
